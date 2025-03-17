@@ -12,14 +12,25 @@ class CPUScheduler {
         int pid[] = new int[n]; // Process IDs
         int arrivalTime[] = new int[n];
         int burstTime[] = new int[n];
-        int priority[] = new int[n];
-        
+        int priority[] = null;//because this array wouldonly be applicable in case user choose the priority scheduling
+
+
+       // If user chooses Priority Scheduling, initialize priority array
+        if (choice == 4) {
+            priority = new int[n];
+        }
         for (int i = 0; i < n; i++) {
             System.out.println("Enter arrival time, burst time, and priority for Process " + (i + 1) + ": ");
             pid[i] = i + 1;
             arrivalTime[i] = sc.nextInt();
             burstTime[i] = sc.nextInt();
             priority[i] = sc.nextInt();
+
+            // Take priority input **only if user selected Priority Scheduling**
+            if (choice == 4) {
+                System.out.print("Enter priority for Process " + (i + 1) + ": ");
+                priority[i] = sc.nextInt();
+            }
         }
         
         System.out.println("Choose scheduling algorithm:\n1: FCFS\n2: SJF Non-Preemptive\n3: SJF Preemptive\n4: Priority Non-Preemptive");
