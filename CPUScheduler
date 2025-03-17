@@ -39,13 +39,15 @@ class CPUScheduler {
         if (choice == 1) {
             new FCFS().schedule(n, pid, arrivalTime, burstTime);
         } 
-        //else if (choice == 2) {
-        //     new SJFNonPreemptive().schedule(n, pid, arrivalTime, burstTime);
-        // } else if (choice == 3) {
-        //     new SJFPreemptive().schedule(n, pid, arrivalTime, burstTime);
-        // } else if (choice == 4) {
-        //     new PriorityNonPreemptive().schedule(n, pid, arrivalTime, burstTime, priority);
-        // } 
+        else if (choice == 2) {
+            new SJFNonPreemptive().schedule(n, pid, arrivalTime, burstTime);
+        } 
+        else if (choice == 3) {
+            new SJFPreemptive().schedule(n, pid, arrivalTime, burstTime);
+        } 
+        else if (choice == 4) {
+            new PriorityNonPreemptive().schedule(n, pid, arrivalTime, burstTime, priority);
+        } 
         else {
             System.out.println("Invalid choice!");
         }
