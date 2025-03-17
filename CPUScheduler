@@ -1,10 +1,13 @@
-import java.util.Scanner;
-import java.util.Arrays;
+import java.util.*;
+
 
 // Main Class to handle user input and call appropriate scheduling algorithm
 class CPUScheduler {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
+        
+        System.out.println("Choose scheduling algorithm:\n1: FCFS\n2: SJF Non-Preemptive\n3: SJF Preemptive\n4: Priority Non-Preemptive");
+        int choice = sc.nextInt();
         
         System.out.print("Enter number of processes: ");
         int n = sc.nextInt();
@@ -12,20 +15,19 @@ class CPUScheduler {
         int pid[] = new int[n]; // Process IDs
         int arrivalTime[] = new int[n];
         int burstTime[] = new int[n];
-        int priority[] = null;//because this array wouldonly be applicable in case user choose the priority scheduling
-
-
-       // If user chooses Priority Scheduling, initialize priority array
+        int priority[] = null;  // Only used for Priority Scheduling
+        
+        // If user chooses Priority Scheduling, initialize priority array
         if (choice == 4) {
             priority = new int[n];
         }
+        
         for (int i = 0; i < n; i++) {
-            System.out.println("Enter arrival time, burst time, and priority for Process " + (i + 1) + ": ");
+            System.out.println("Enter arrival time and burst time for Process " + (i + 1) + ": ");
             pid[i] = i + 1;
             arrivalTime[i] = sc.nextInt();
             burstTime[i] = sc.nextInt();
-            priority[i] = sc.nextInt();
-
+            
             // Take priority input **only if user selected Priority Scheduling**
             if (choice == 4) {
                 System.out.print("Enter priority for Process " + (i + 1) + ": ");
@@ -33,20 +35,22 @@ class CPUScheduler {
             }
         }
         
-        System.out.println("Choose scheduling algorithm:\n1: FCFS\n2: SJF Non-Preemptive\n3: SJF Preemptive\n4: Priority Non-Preemptive");
-        int choice = sc.nextInt();
-        
+        // Call the appropriate scheduling algorithm
         if (choice == 1) {
             new FCFS().schedule(n, pid, arrivalTime, burstTime);
-        } else if (choice == 2) {
-            new SJFNonPreemptive().schedule(n, pid, arrivalTime, burstTime);
-        } else if (choice == 3) {
-            new SJFPreemptive().schedule(n, pid, arrivalTime, burstTime);
-        } else if (choice == 4) {
-            new PriorityNonPreemptive().schedule(n, pid, arrivalTime, burstTime, priority);
-        } else {
+        } 
+        //else if (choice == 2) {
+        //     new SJFNonPreemptive().schedule(n, pid, arrivalTime, burstTime);
+        // } else if (choice == 3) {
+        //     new SJFPreemptive().schedule(n, pid, arrivalTime, burstTime);
+        // } else if (choice == 4) {
+        //     new PriorityNonPreemptive().schedule(n, pid, arrivalTime, burstTime, priority);
+        // } 
+        else {
             System.out.println("Invalid choice!");
         }
+
+        sc.close();
     }
 }
 
