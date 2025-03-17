@@ -1,0 +1,40 @@
+import java.util.Scanner;
+import java.util.Arrays;
+
+// Main Class to handle user input and call appropriate scheduling algorithm
+class CPUScheduler {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        
+        System.out.print("Enter number of processes: ");
+        int n = sc.nextInt();
+        
+        int pid[] = new int[n]; // Process IDs
+        int arrivalTime[] = new int[n];
+        int burstTime[] = new int[n];
+        int priority[] = new int[n];
+        
+        for (int i = 0; i < n; i++) {
+            System.out.println("Enter arrival time, burst time, and priority for Process " + (i + 1) + ": ");
+            pid[i] = i + 1;
+            arrivalTime[i] = sc.nextInt();
+            burstTime[i] = sc.nextInt();
+            priority[i] = sc.nextInt();
+        }
+        
+        System.out.println("Choose scheduling algorithm:\n1: FCFS\n2: SJF Non-Preemptive\n3: SJF Preemptive\n4: Priority Non-Preemptive");
+        int choice = sc.nextInt();
+        
+        if (choice == 1) {
+            new FCFS().schedule(n, pid, arrivalTime, burstTime);
+        } else if (choice == 2) {
+            new SJFNonPreemptive().schedule(n, pid, arrivalTime, burstTime);
+        } else if (choice == 3) {
+            new SJFPreemptive().schedule(n, pid, arrivalTime, burstTime);
+        } else if (choice == 4) {
+            new PriorityNonPreemptive().schedule(n, pid, arrivalTime, burstTime, priority);
+        } else {
+            System.out.println("Invalid choice!");
+        }
+    }
+}
